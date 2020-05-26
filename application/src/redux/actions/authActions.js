@@ -11,9 +11,9 @@ const finishLogin = (email, token) => {
     }
 }
 
-export const loginUser = (email, password) => {
-    return (dispatch) => {
-        fetch(`${SERVER_IP}/api/login`, {
+export const loginUser = (email, password) => async (dispatch) => {
+    try {
+        const response = await fetch(`${SERVER_IP}/api/login`, {
             method: 'POST',
             body: JSON.stringify({
                 email,
@@ -22,13 +22,16 @@ export const loginUser = (email, password) => {
             headers: {
                 'Content-Type': 'application/json'
             },
-        }).then(response => response.json())
-        .then(response => {
-            if (response.success) {
-                dispatch(finishLogin(response.email, response.token));
-            }
-        })
-    };
+        });
+        const body = await response.json();
+        if (body.success) {
+            const result = dispatch(finishLogin(body.email, body.token));
+            return result;
+        }
+
+    } catch (err) {
+        console.error('An error occurred while trying to log you in', err.toString());
+    }
 }
 
 export const logoutUser = () => {
