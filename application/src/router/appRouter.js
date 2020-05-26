@@ -17,12 +17,7 @@ const PrivateRoute = connect(mapStateToProps)(protectedRoute)
 const AppRouter = (props) => {
   return (
     <Router>
-      <Switch>
-        <Route path="/" exact component={Main} />
-        <Route path="/login" exact component={Login} />
-        <PrivateRoute path="/order" exact component={OrderForm} />
-        <PrivateRoute path="/view-orders" exact component={ViewOrders} />
-      </Switch>
+
     </Router>
   );
 }
