@@ -43,7 +43,7 @@ class ViewOrders extends Component {
             <Template>
                 <div className="container-fluid">
                     {this.state.orders.map(order => {
-                        const createdDate = new Date(order.createdAt);
+                        const createdDate = new Date(order.createdAt).toTimeString().substr(0, 8);
                         return (
                             <div className="row view-order-container" key={order._id}>
                                 <div className="col-md-4 view-order-left-col p-3">
@@ -51,12 +51,11 @@ class ViewOrders extends Component {
                                     <p>Ordered by: {order.ordered_by || ''}</p>
                                 </div>
                                 <div className="col-md-4 d-flex view-order-middle-col">
-                                    <p>Order placed at {`${createdDate.getHours()}:${createdDate.getMinutes()}:${createdDate.getSeconds()}`}</p>
+                                    <p>Order placed at {createdDate}</p>
                                     <p>Quantity: {order.quantity}</p>
                                 </div>
                                 <div className="col-md-4 view-order-right-col">
-                                    <Link to={`/order/${order._id}`} className="btn btn-success">Edit</Link>
-                                    <button className="btn btn-danger" onClick={() => this.deleteOrder(order._id)}>Delete</button>
+
                                 </div>
                             </div>
                         );

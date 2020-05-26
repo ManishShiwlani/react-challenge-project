@@ -4,12 +4,12 @@ import { connect } from "react-redux";
 import { logoutUser } from "../../redux/actions/authActions";
 import "./nav.css";
 
+
 const mapActionsToProps = dispatch => ({
     handleLogout() {
         dispatch(logoutUser())
     }
 })
-
 
 const Nav = (props) => {
     return (
